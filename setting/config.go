@@ -12,22 +12,12 @@ type config struct {
 	App struct {
 		Port string
 	}
-	Redis struct {
-		Network string
-		Addr    string
-		Port    string
-		Expire  int
-	}
 }
 
 var Config config
 
 func init() {
 	Config.App.Port = "9000"
-	Config.Redis.Network = "tcp"
-	Config.Redis.Addr = "127.0.0.1"
-	Config.Redis.Port = "6379"
-	Config.Redis.Expire = 3600
 
 	f, err := os.Open("config.yaml")
 	if err != nil {
