@@ -25,3 +25,13 @@
 
 1. cd go-eg
 2. docker build . -t xx:xx
+
+## test
+
+```sh
+docker run -d --name xx -p 9000:9000 xx:xx
+
+curl --location --request GET 'http://192.168.103.61:9000/' \
+--header 'Content-Type: text/plain' \
+--data 'your-data'
+```
