@@ -3,7 +3,7 @@ app:
 
 auth:
   secret: admin # only for auther
-  url: http://localhost:9000/auth
+  url: http://localhost:9001/auth
 
 cache:
-  url: http://localhost:9000/
+  url: http://localhost:9002/

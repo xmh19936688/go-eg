@@ -42,6 +42,9 @@ func init() {
 		return
 	}
 
+	log.Println("config.yaml found:")
+	log.Println(string(bs))
+
 	err = yaml.Unmarshal(bs, &Config)
 	if err != nil {
 		log.Println("failed to read config:", err.Error())
