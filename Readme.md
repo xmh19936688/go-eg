@@ -37,5 +37,5 @@ open "http://${IP}:9000/" in browser
 docker stop xmh-ui xmh-auther xmh-cacher
 docker rm xmh-ui xmh-auther xmh-cacher
 docker rmi xmh-ui:1 xmh-auther:1 xmh-cacher:1
-rm -f ./config.yaml ./ui ./auther ./cacher 
+rm -f ./config.yaml ./ui ./auther ./cacher
 ```
