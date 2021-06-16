@@ -12,26 +12,17 @@
 
 1. git clone http://172.16.99.4:10080/xumenghao/go-eg.git
 
-## go build
+## build
 
-1. docker cp ./go-eg go-env-16:/go/src/
-2. docker exec -it go-env-16 bash
-3. cd /go/src/go-eg
-4. CGO_ENABLED=0 go build ./cmd/cacher/
-5. exit
-6. docker cp go-env-16:/go/src/go-eg/cacher
-
-## docker build
-
-1. cd go-eg
-2. docker build . -t xx:xx
+1. chmod +x ./build.sh
+2. ./build.sh
 
 ## test
 
 ```sh
-docker run -d --name xx -p 9000:9000 xx:xx
+docker run -d --name xmh-ui -p 9000:9000 xmh-ui:1
+docker run -d --name xmh-auther -p 9001:9000 xmh-auther:1
+docker run -d --name xmh-cacher -p 9002:9000 xmh-cacher:1
 
-curl --location --request GET 'http://192.168.103.61:9000/' \
---header 'Content-Type: text/plain' \
---data 'your-data'
+open 'http://localhost:9000/' in browser
 ```

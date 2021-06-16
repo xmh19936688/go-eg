@@ -1,6 +1,7 @@
 FROM alpine
 
 COPY auther /
+COPY config.template.yaml /config.yaml
 
 WORKDIR /
 
