@@ -1,32 +1,56 @@
 package main
 
 import (
-	"fmt"
+	"bytes"
+	"encoding/json"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
 	"os/signal"
+
+	"xmh.go-eg/model"
+	"xmh.go-eg/setting"
 )
 
-func main() {
-	fmt.Println("starting repeater")
-	defer fmt.Println("bye")
-	defer fmt.Println("tear down")
-
-	// create server
-	var server http.HandlerFunc = func(w http.ResponseWriter, r *http.Request) {
-		bs, err := ioutil.ReadAll(r.Body)
-		if err != nil {
-			w.Write([]byte("error: " + err.Error()))
-			return
-		}
-		w.Write([]byte("read: " + string(bs)))
+var server http.HandlerFunc = func(w http.ResponseWriter, r *http.Request) {
+	token := r.Header.Get("Authorization")
+	log.Println("auth-header:", token)
+	var body = model.Identity{
+		Token: token,
 	}
+	bs, err := json.Marshal(body)
+	if err != nil {
+		log.Println(err.Error())
+		w.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+
+	resp, err := http.Post(setting.Config.Auth.Url, "application/json", bytes.NewReader(bs))
+	if err != nil || resp.StatusCode > 200 {
+		w.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+
+	bs, err = ioutil.ReadAll(r.Body)
+	log.Println("received:", string(bs))
+	if err != nil {
+		w.Write([]byte("error: " + err.Error()))
+		return
+	}
+	w.Write([]byte("read: " + string(bs)))
+}
+
+func main() {
+	log.Println("starting repeater")
+	defer log.Println("bye")
+	defer log.Println("tear down")
 
 	// start server
 	chErr := make(chan error)
 	go func() {
-		chErr <- http.ListenAndServe("0.0.0.0:9000", server)
+		log.Println("listening:", setting.Config.App.Port)
+		chErr <- http.ListenAndServe("0.0.0.0:"+setting.Config.App.Port, server)
 	}()
 
 	// process kill and interrupt
@@ -38,7 +62,7 @@ func main() {
 	case <-chInterrupt:
 		return
 	case err := <-chErr:
-		fmt.Println(err.Error())
+		log.Println(err.Error())
 		return
 	}
 }

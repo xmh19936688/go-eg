@@ -7,21 +7,19 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	cacherApi "xmh.go-eg/api/cacher"
+	autherApi "xmh.go-eg/api/auther"
 	"xmh.go-eg/common"
 )
 
 func main() {
-	log.Println("starting cacher")
+	log.Println("starting auther")
 	defer log.Println("bye")
 	defer log.Println("tear down")
 
 	gin.SetMode(gin.DebugMode)
 	gs := gin.Default()
-	gs.LoadHTMLGlob("static/*")
-	gs.Static("/static", "static")
 
-	cacherApi.Init(gs)
+	autherApi.Init(gs)
 	srv := common.RunServer(gs)
 
 	interrupt := make(chan os.Signal)

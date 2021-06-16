@@ -10,14 +10,20 @@ import (
 
 type config struct {
 	App struct {
-		Port string
-	}
+		Port string `json:"port" yaml:"port"`
+	} `json:"app" yaml:"app"`
+	Auth struct {
+		Secret string `json:"secret" yaml:"secret"`
+		Url    string `json:"url" yaml:"url"`
+	} `json:"auth" yaml:"auth"`
 }
 
 var Config config
 
 func init() {
 	Config.App.Port = "9000"
+	Config.Auth.Secret = "admin"
+	Config.Auth.Url = "http://localhost:9000/auth"
 
 	f, err := os.Open("config.yaml")
 	if err != nil {

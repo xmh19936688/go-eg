@@ -1,4 +1,4 @@
-package api
+package cacher
 
 import (
 	"net/http"
@@ -6,21 +6,18 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
+
+	"xmh.go-eg/model"
 )
 
 var cacheMap sync.Map
-
-type kv struct {
-	Key   string `json:"key"`
-	Value string `json:"value"`
-}
 
 func index(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", "")
 }
 
 func set(c *gin.Context) {
-	var form kv
+	var form model.KV
 	if err := binding.JSON.Bind(c.Request, &form); err != nil {
 		c.JSON(http.StatusBadRequest, "invalid input")
 		return
@@ -31,7 +28,7 @@ func set(c *gin.Context) {
 }
 
 func get(c *gin.Context) {
-	var form kv
+	var form model.KV
 	if err := binding.JSON.Bind(c.Request, &form); err != nil {
 		c.JSON(http.StatusBadRequest, "invalid input")
 		return

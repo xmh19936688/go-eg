@@ -1,0 +1,6 @@
+app:
+  port: 9000
+
+auth:
+  secret: admin # only for auther
+  url: http://localhost:9000/auth
