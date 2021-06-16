@@ -31,7 +31,13 @@ func auth(c *gin.Context) {
 	}
 
 	resp, err := http.Post(setting.Config.Auth.Url, "application/json", bytes.NewReader(bs))
-	if err != nil || resp.StatusCode > 200 {
+	if err != nil {
+		log.Println(err.Error())
+		c.JSON(http.StatusInternalServerError, "auther error: "+err.Error())
+		c.Abort()
+		return
+	}
+	if resp.StatusCode > 200 {
 		c.JSON(http.StatusUnauthorized, "invalid token")
 		c.Abort()
 		return
