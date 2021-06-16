@@ -24,11 +24,11 @@ IP=192.168.103.61
 cp ./config.template.yaml ./config.yaml
 sed -i "s/localhost/${IP}/g" ./config.yaml
 
-docker run -d --name xmh-ui -p 9000:9000 -v ./config.yaml:/config.yaml xmh-ui:1
-docker run -d --name xmh-auther -p 9001:9000 -v ./config.yaml:/config.yaml xmh-auther:1
-docker run -d --name xmh-cacher -p 9002:9000 -v ./config.yaml:/config.yaml xmh-cacher:1
+docker run -d --name xmh-ui -p 9000:9000 -v $(pwd)/config.yaml:/config.yaml xmh-ui:1
+docker run -d --name xmh-auther -p 9001:9000 -v $(pwd)/config.yaml:/config.yaml xmh-auther:1
+docker run -d --name xmh-cacher -p 9002:9000 -v $(pwd)/config.yaml:/config.yaml xmh-cacher:1
 
-open 'http://localhost:9000/' in browser
+open "http://${IP}:9000/" in browser
 ```
 
 ## clean
