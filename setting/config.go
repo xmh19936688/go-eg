@@ -16,6 +16,9 @@ type config struct {
 		Secret string `json:"secret" yaml:"secret"`
 		Url    string `json:"url" yaml:"url"`
 	} `json:"auth" yaml:"auth"`
+	Cache struct {
+		Url string `json:"url" yaml:"url"`
+	} `json:"cache" yaml:"cache"`
 }
 
 var Config config
@@ -23,7 +26,8 @@ var Config config
 func init() {
 	Config.App.Port = "9000"
 	Config.Auth.Secret = "admin"
-	Config.Auth.Url = "http://localhost:9000/auth"
+	Config.Auth.Url = "http://localhost:9001/auth"
+	Config.Cache.Url = "http://localhost:9002/"
 
 	f, err := os.Open("config.yaml")
 	if err != nil {

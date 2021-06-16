@@ -18,6 +18,20 @@
 
     <el-collapse v-model="activeNames">
 
+        <el-collapse-item title="Login" name="login">
+            <el-form label-width="80px">
+                <el-form-item label="Username">
+                    <el-input v-model="user.username"></el-input>
+                </el-form-item>
+                <el-form-item label="Password">
+                    <el-input v-model="user.password"></el-input>
+                </el-form-item>
+            </el-form>
+            <div>
+                <el-button style="margin:10px;" type="primary" @click="login">Login</el-button>
+            </div>
+        </el-collapse-item>
+
         <el-collapse-item title="Write Cache" name="set">
             <el-form label-width="80px">
                 <el-form-item label="Key">
@@ -66,7 +80,12 @@
     var vm = new Vue({
         el: 'div#app',
         data: {
-            activeNames: ['set', 'get', 'att'],
+            activeNames: ['login', 'set', 'get', 'att'],
+            token: '',
+            user: {
+                username: 'admin',
+                password: 'admin',
+            },
             up: {
                 key: 'abc',
                 value: '123456',
@@ -80,10 +99,30 @@
             },
         },
         methods: {
+            login: function () {
+                var self = this;
+                var req = axios.create();
+                req.post('/auth', this.user)
+                    .then(function (resp) {
+                        self.token = resp.data.token
+                        self.$message({
+                            message: 'success',
+                            type: 'success'
+                        });
+                    })
+                    .catch(function (error) {
+                        self.$message.error(error.response.data);
+                    })
+            },
             set: function () {
                 var self = this;
                 var req = axios.create();
-                req.post('/set', this.up)
+                var config = {
+                    headers: {
+                        'Authorization': self.token
+                    }
+                }
+                req.post('/set', this.up, config)
                     .then(function (resp) {
                         self.$message({
                             message: 'success',
@@ -96,7 +135,12 @@
             },
             get: function () {
                 var self = this;
-                axios.create().post('/get', this.down)
+                var config = {
+                    headers: {
+                        'Authorization': self.token
+                    }
+                }
+                axios.create().post('/get', this.down, config)
                     .then(function (resp) {
                         self.$message({
                             message: resp.data,

@@ -25,13 +25,15 @@ func auth(c *gin.Context) {
 	bs, err := json.Marshal(body)
 	if err != nil {
 		log.Println(err.Error())
-		c.JSON(http.StatusUnauthorized, nil)
+		c.JSON(http.StatusUnauthorized, "invalid token")
+		c.Abort()
 		return
 	}
 
 	resp, err := http.Post(setting.Config.Auth.Url, "application/json", bytes.NewReader(bs))
 	if err != nil || resp.StatusCode > 200 {
-		c.JSON(http.StatusUnauthorized, nil)
+		c.JSON(http.StatusUnauthorized, "invalid token")
+		c.Abort()
 		return
 	}
 }
@@ -69,6 +71,6 @@ func get(c *gin.Context) {
 
 func Init(gs *gin.Engine) {
 	gs.GET("/", index)
-	gs.POST("/set", set, auth)
-	gs.POST("/get", get, auth)
+	gs.POST("/set", auth, set)
+	gs.POST("/get", auth, get)
 }
