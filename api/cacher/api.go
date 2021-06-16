@@ -1,6 +1,9 @@
 package cacher
 
 import (
+	"bytes"
+	"encoding/json"
+	"log"
 	"net/http"
 	"sync"
 
@@ -8,9 +11,30 @@ import (
 	"github.com/gin-gonic/gin/binding"
 
 	"xmh.go-eg/model"
+	"xmh.go-eg/setting"
 )
 
 var cacheMap sync.Map
+
+func auth(c *gin.Context) {
+	token := c.Request.Header.Get("Authorization")
+	log.Println("auth-header:", token)
+	var body = model.Identity{
+		Token: token,
+	}
+	bs, err := json.Marshal(body)
+	if err != nil {
+		log.Println(err.Error())
+		c.JSON(http.StatusUnauthorized, nil)
+		return
+	}
+
+	resp, err := http.Post(setting.Config.Auth.Url, "application/json", bytes.NewReader(bs))
+	if err != nil || resp.StatusCode > 200 {
+		c.JSON(http.StatusUnauthorized, nil)
+		return
+	}
+}
 
 func index(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", "")
@@ -45,6 +69,6 @@ func get(c *gin.Context) {
 
 func Init(gs *gin.Engine) {
 	gs.GET("/", index)
-	gs.POST("/set", set)
-	gs.POST("/get", get)
+	gs.POST("/set", set, auth)
+	gs.POST("/get", get, auth)
 }
