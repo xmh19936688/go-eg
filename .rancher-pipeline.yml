@@ -20,15 +20,21 @@ stages:
       buildContext: .
       tag: xmh-cacher:v1
       registry: core.harbor.domain
+    env:
+      PLUGIN_INSECURE: "true"
   - publishImageConfig:
       dockerfilePath: ./auther.Dockerfile
       buildContext: .
       tag: xmh-auther:v1
       registry: core.harbor.domain
+    env:
+      PLUGIN_INSECURE: "true"
   - publishImageConfig:
       dockerfilePath: ./ui.Dockerfile
       buildContext: .
       tag: xmh-ui:v1
       registry: core.harbor.domain
+    env:
+      PLUGIN_INSECURE: "true"
 timeout: 60
 notification: {}
