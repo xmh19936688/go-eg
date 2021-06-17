@@ -7,5 +7,31 @@ stages:
         ls
         pwd
         go build ./cmd/auther
+  - runScriptConfig:
+      image: golang:1.16
+      shellScript: go build ./cmd/cacher
+  - runScriptConfig:
+      image: golang:1.16
+      shellScript: go build ./cmd/ui
+- name: image
+  steps:
+  - publishImageConfig:
+      dockerfilePath: ./cacher.Dockerfile
+      buildContext: .
+      tag: xmh-cacher:v1
+      pushRemote: true
+      registry: https://core.harbor.domain/
+  - publishImageConfig:
+      dockerfilePath: ./auther.Dockerfile
+      buildContext: .
+      tag: xmh-auther:v1
+      pushRemote: true
+      registry: https://core.harbor.domain/
+  - publishImageConfig:
+      dockerfilePath: ./ui.Dockerfile
+      buildContext: .
+      tag: xmh-ui:v1
+      pushRemote: true
+      registry: https://core.harbor.domain/
 timeout: 60
 notification: {}
