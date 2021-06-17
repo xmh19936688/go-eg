@@ -19,19 +19,16 @@ stages:
       dockerfilePath: ./cacher.Dockerfile
       buildContext: .
       tag: xmh-cacher:v1
-      pushRemote: true
       registry: core.harbor.domain
   - publishImageConfig:
       dockerfilePath: ./auther.Dockerfile
       buildContext: .
       tag: xmh-auther:v1
-      pushRemote: true
       registry: core.harbor.domain
   - publishImageConfig:
       dockerfilePath: ./ui.Dockerfile
       buildContext: .
       tag: xmh-ui:v1
-      pushRemote: true
       registry: core.harbor.domain
 timeout: 60
 notification: {}
