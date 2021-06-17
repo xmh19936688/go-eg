@@ -18,21 +18,24 @@ stages:
   - publishImageConfig:
       dockerfilePath: ./cacher.Dockerfile
       buildContext: .
-      tag: xmh-cacher:v1
+      tag: library/xmh-cacher:v1
+      pushRemote: true
       registry: core.harbor.domain
     env:
       PLUGIN_INSECURE: "true"
   - publishImageConfig:
       dockerfilePath: ./auther.Dockerfile
       buildContext: .
-      tag: xmh-auther:v1
+      tag: library/xmh-auther:v1
+      pushRemote: true
       registry: core.harbor.domain
     env:
       PLUGIN_INSECURE: "true"
   - publishImageConfig:
       dockerfilePath: ./ui.Dockerfile
       buildContext: .
-      tag: xmh-ui:v1
+      tag: library/xmh-ui:v1
+      pushRemote: true
       registry: core.harbor.domain
     env:
       PLUGIN_INSECURE: "true"
