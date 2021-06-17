@@ -4,8 +4,8 @@ stages:
   - runScriptConfig:
       image: golang:1.16
       shellScript: |-
-        go build cmd/auther
         ls
         pwd
+        go build ./cmd/auther
 timeout: 60
 notification: {}
