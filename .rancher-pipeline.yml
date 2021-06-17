@@ -1,0 +1,11 @@
+stages:
+- name: compile
+  steps:
+  - runScriptConfig:
+      image: golang:1.16
+      shellScript: |-
+        ls
+        pwd
+        go build ./cmd/auther
+timeout: 60
+notification: {}
