@@ -6,13 +6,13 @@ stages:
       shellScript: |-
         ls
         pwd
-        go build ./cmd/auther
+        CGO_ENABLED=0 go build ./cmd/auther
   - runScriptConfig:
       image: golang:1.16
-      shellScript: go build ./cmd/cacher
+      shellScript: CGO_ENABLED=0 go build ./cmd/cacher
   - runScriptConfig:
       image: golang:1.16
-      shellScript: go build ./cmd/ui
+      shellScript: CGO_ENABLED=0 go build ./cmd/ui
 - name: image
   steps:
   - publishImageConfig:
