@@ -1,6 +1,7 @@
 package ui
 
 import (
+	"fmt"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
@@ -17,6 +18,9 @@ func auth(c *gin.Context) {
 	proxy := &httputil.ReverseProxy{
 		Director: func(req *http.Request) {
 			req.URL = u
+			fmt.Println("req.URL:", req.URL)
+			fmt.Println("req:", *req)
+			req.Host = u.Host
 		},
 		ErrorHandler: func(w http.ResponseWriter, r *http.Request, err error) {
 			c.JSON(http.StatusUnauthorized, "auther error: "+err.Error())
@@ -36,6 +40,7 @@ func set(c *gin.Context) {
 			req.URL.Scheme = "http"
 			req.URL.Host = u.Host
 			req.URL.Path = c.Request.URL.Path
+			req.Host = u.Host
 		},
 		ErrorHandler: func(w http.ResponseWriter, r *http.Request, err error) {
 			c.JSON(http.StatusInternalServerError, "cacher error: "+err.Error())
@@ -51,6 +56,7 @@ func get(c *gin.Context) {
 			req.URL.Scheme = "http"
 			req.URL.Host = u.Host
 			req.URL.Path = c.Request.URL.Path
+			req.Host = u.Host
 		},
 		ErrorHandler: func(w http.ResponseWriter, r *http.Request, err error) {
 			c.JSON(http.StatusInternalServerError, "cacher error: "+err.Error())
