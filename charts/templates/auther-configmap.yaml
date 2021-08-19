@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  config.yaml: |-
+    app:
+      port: 9000
+
+    auth:
+      secret: admin # only for auther
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-auther-config

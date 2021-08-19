@@ -1,0 +1,14 @@
+apiVersion: v1
+data:
+  config.yaml: |-
+    app:
+      port: 9000
+
+    auth:
+      url: http://{{ .Release.Name }}-auther:9000/auth
+
+    cache:
+      url: http://{{ .Release.Name }}-cacher:9000/
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-ui-config
