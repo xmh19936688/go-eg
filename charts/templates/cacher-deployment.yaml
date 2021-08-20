@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   labels:
     k8s-app: {{ .Release.Name }}-cacher
+    app: {{ .Release.Name }}-cacher
+    version: "1.0"
   name: {{ .Release.Name }}-cacher
 spec:
   progressDeadlineSeconds: 600
@@ -20,6 +22,8 @@ spec:
     metadata:
       labels:
         k8s-app: {{ .Release.Name }}-cacher
+        app: {{ .Release.Name }}-cacher
+        version: "1.0"
     spec:
       containers:
         - image: core.harbor.domain/library/xmh-cacher:v1

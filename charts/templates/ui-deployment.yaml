@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   labels:
     k8s-app: {{ .Release.Name }}-ui
+    app: {{ .Release.Name }}-ui
+    version: "1.0"
   name: {{ .Release.Name }}-ui
 spec:
   progressDeadlineSeconds: 600
@@ -20,6 +22,8 @@ spec:
     metadata:
       labels:
         k8s-app: {{ .Release.Name }}-ui
+        app: {{ .Release.Name }}-ui
+        version: "1.0"
     spec:
       containers:
         - image: core.harbor.domain/library/xmh-ui:v1
