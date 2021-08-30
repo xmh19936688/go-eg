@@ -26,7 +26,7 @@ spec:
         version: "1.0"
     spec:
       containers:
-        - image: core.harbor.domain/library/xmh-auther:v1
+        - image: {{ .Values.auther.image }}:{{ .Values.auther.tag }}
           imagePullPolicy: IfNotPresent
           name: {{ .Release.Name }}-auther
           resources: {}

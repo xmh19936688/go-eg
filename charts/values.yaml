@@ -1,1 +1,13 @@
 host: "go.eg.ui"
+
+ui:
+  image: "core.harbor.domain/library/xmh-ui"
+  tag: "v1"
+
+auther:
+  image: "core.harbor.domain/library/xmh-auther"
+  tag: "v1"
+
+cacher:
+  image: "core.harbor.domain/library/xmh-cacher"
+  tag: ""

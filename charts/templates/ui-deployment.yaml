@@ -26,13 +26,13 @@ spec:
         version: "1.0"
     spec:
       containers:
-        - image: core.harbor.domain/library/xmh-ui:v1
+        - image: {{ .Values.ui.image }}:{{ .Values.ui.tag }}
           imagePullPolicy: IfNotPresent
           name: {{ .Release.Name }}-ui
-          resources: {}
+          resources: { }
           securityContext:
             allowPrivilegeEscalation: false
-            capabilities: {}
+            capabilities: { }
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
@@ -49,7 +49,7 @@ spec:
         - name: my-harbor
       restartPolicy: Always
       schedulerName: default-scheduler
-      securityContext: {}
+      securityContext: { }
       terminationGracePeriodSeconds: 30
       volumes:
         - configMap:
