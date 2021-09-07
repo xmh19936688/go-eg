@@ -10,4 +10,4 @@ auther:
 
 cacher:
   image: "core.harbor.domain/library/xmh-cacher"
-  tag: ""
+  tag: "v1"
