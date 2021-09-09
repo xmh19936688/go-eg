@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   labels:
     k8s-app: {{ .Release.Name }}-ui
+    app.kubernetes.io/name: {{ .Release.Name }}-ui
     app: {{ .Release.Name }}-ui
     version: "1.0"
   name: {{ .Release.Name }}-ui
@@ -13,6 +14,7 @@ spec:
   selector:
     matchLabels:
       k8s-app: {{ .Release.Name }}-ui
+      app.kubernetes.io/name: {{ .Release.Name }}-ui
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -22,6 +24,7 @@ spec:
     metadata:
       labels:
         k8s-app: {{ .Release.Name }}-ui
+        app.kubernetes.io/name: {{ .Release.Name }}-ui
         app: {{ .Release.Name }}-ui
         version: "1.0"
     spec:
