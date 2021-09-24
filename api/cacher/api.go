@@ -72,7 +72,7 @@ func get(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, value)
+	c.JSON(http.StatusOK, value.(string)+"-beta")
 }
 
 func Init(gs *gin.Engine) {
