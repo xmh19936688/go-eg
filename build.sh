@@ -1,5 +1,5 @@
 echo preparing...
-docker run -d --name  go-env-16 golang:1.16
+docker run -itd --name  go-env-16 golang:1.16
 docker start go-env-16
 
 echo copying files...
