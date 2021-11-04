@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION=v1
+VERSION=beta
 
 echo preparing...
 docker run -itd --name  go-env-16 golang:1.16
