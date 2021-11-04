@@ -1,3 +1,4 @@
+#!/bin/sh
 echo preparing...
 docker run -itd --name  go-env-16 golang:1.16
 docker start go-env-16
