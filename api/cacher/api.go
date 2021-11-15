@@ -56,7 +56,7 @@ func set(c *gin.Context) {
 	}
 
 	cacheMap.Store(form.Key, form.Value)
-	c.JSON(http.StatusOK, "success")
+	c.JSON(http.StatusOK, "success-beta")
 }
 
 func get(c *gin.Context) {
