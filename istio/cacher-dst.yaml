@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: beta-cacher-dst
+  namespace: xmh3
+spec:
+  host: xmh-istio-cacher
+  subsets:
+    - name: beta
+      labels:
+        app: eg-beta-cacher
+    - name: v1
+      labels:
+        app: xmh-t-cacher

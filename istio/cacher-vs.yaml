@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: beta-cacher-vs
+  namespace: xmh3
+spec:
+  hosts:
+    - xmh-istio-cacher
+  http:
+    - route:
+        - destination:
+            host: xmh-istio-cacher
+            subset: beta
+          weight: 20
+        - destination:
+            host: xmh-istio-cacher
+            subset: v1
+          weight: 80
