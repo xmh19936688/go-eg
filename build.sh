@@ -17,6 +17,6 @@ docker cp go-env-16:/go/src/go-eg/cacher .
 docker cp go-env-16:/go/src/go-eg/ui .
 
 echo building images...
-docker build . -f auther.Dockerfile -t xmh-auther:1
-docker build . -f cacher.Dockerfile -t xmh-cacher:1
-docker build . -f ui.Dockerfile -t xmh-ui:1
+docker build . -f auther.Dockerfile -t xmh-auther:v1
+docker build . -f cacher.Dockerfile -t xmh-cacher:v1
+docker build . -f ui.Dockerfile -t xmh-ui:v1
