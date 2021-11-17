@@ -9,10 +9,11 @@ import (
 
 	cacherApi "xmh.go-eg/api/cacher"
 	"xmh.go-eg/common"
+	"xmh.go-eg/setting"
 )
 
 func main() {
-	log.Println("starting cacher")
+	log.Println("starting cacher, version:", setting.Version)
 	defer log.Println("bye")
 	defer log.Println("tear down")
 

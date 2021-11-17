@@ -9,10 +9,11 @@ import (
 
 	autherApi "xmh.go-eg/api/auther"
 	"xmh.go-eg/common"
+	"xmh.go-eg/setting"
 )
 
 func main() {
-	log.Println("starting auther")
+	log.Println("starting auther, version:", setting.Version)
 	defer log.Println("bye")
 	defer log.Println("tear down")
 

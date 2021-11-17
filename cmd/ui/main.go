@@ -9,10 +9,11 @@ import (
 
 	uiApi "xmh.go-eg/api/ui"
 	"xmh.go-eg/common"
+	"xmh.go-eg/setting"
 )
 
 func main() {
-	log.Println("starting cacher")
+	log.Println("starting ui, version:", setting.Version)
 	defer log.Println("bye")
 	defer log.Println("tear down")
 

@@ -8,6 +8,9 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+// Version from build flag, do NOT modify.
+var Version = ""
+
 type config struct {
 	App struct {
 		Port string `json:"port" yaml:"port"`
