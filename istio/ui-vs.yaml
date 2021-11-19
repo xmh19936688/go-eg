@@ -1,0 +1,24 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: xmh-istio-ui-vs
+  namespace: xmh3
+spec:
+  gateways:
+    - xmh-istio-ui-gw
+  hosts:
+    - eg.gw.istio.xmh
+  http:
+    - route:
+        - destination:
+            host: xmh-istio-ui
+            port:
+              number: 9000
+            subset: beta
+          weight: 20
+        - destination:
+            host: xmh-istio-ui
+            port:
+              number: 9000
+            subset: v1
+          weight: 80

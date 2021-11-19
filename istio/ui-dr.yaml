@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: xmh-istio-ui-dr
+  namespace: xmh3
+spec:
+  host: xmh-istio-ui
+  subsets:
+    - name: beta
+      labels:
+        app: eg-beta-ui
+    - name: v1
+      labels:
+        app: xmh-t-ui

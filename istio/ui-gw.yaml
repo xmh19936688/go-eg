@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: xmh-istio-ui-gw
+  namespace: xmh3
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - eg.gw.istio.xmh
+      port:
+        number: 9002
+        name: http
+        protocol: HTTP
