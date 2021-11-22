@@ -26,7 +26,7 @@ spec:
         version: "1.0"
     spec:
       containers:
-        - image: "xmh.harbor.domain/library/xmh-go-ui:latest"
+        - image: "cce.ztx.com/poc/xmh-ui:latest"
           imagePullPolicy: IfNotPresent
           name: xmh-go-ui
           resources: { }
