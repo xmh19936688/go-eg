@@ -26,8 +26,7 @@ spec:
         version: "1.0"
     spec:
       containers:
-        - image: "cce.ztx.com/poc/xmh-ui:latest"
-          imagePullPolicy: IfNotPresent
+        - imagePullPolicy: IfNotPresent
           name: xmh-go-ui
           resources: { }
           securityContext:
