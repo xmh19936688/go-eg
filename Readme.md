@@ -10,7 +10,7 @@
 
 ## clone
 
-1. git clone http://172.16.99.4:10080/xumenghao/go-eg.git
+1. git clone https://github.com/xmh19936688/go-eg.git
 
 ## build
 
